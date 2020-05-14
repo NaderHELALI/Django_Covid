@@ -1,0 +1,11 @@
+<div>
+    <h1>Création d'un compte</h1>
+</div>
+
+{% load crispy_forms_tags %}
+
+<form method="post" class="uniForm">
+    {% csrf_token %}
+    {{ form|crispy}}
+    <input type="submit" value="Créer un compte" />
+</form>

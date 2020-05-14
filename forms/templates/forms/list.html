@@ -1,0 +1,23 @@
+{% extends "forms/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<h1>Commande de {{d.type}} #{{d.id}}</h1>
+	<form method="post" action="#">
+		{% csrf_token %}
+		{% for product in d.produits.all %}
+			<p>{{product.name}} : {{product.unit}}</p>
+		{% endfor %}
+		<label>Nom du produit</label>
+		<select name="name">
+			{% for produit in allproducts %}
+				<option value="{{produit.name}}">{{produit.name}} ({{produit.unit}})</option>
+			{% endfor %}
+		</select>
+		<button type="submit", name="newProduct", value="newProduct">
+			Ajouter
+		</button>
+		<p><a href="/choix"> Retour </p>
+	</form>
+{% endblock %} 
