@@ -1,27 +1,30 @@
 from django.db import models
 
-from .forms import type_choices
-
-class Type(models.Model):
-    type = models.CharField(max_length=200, choices=type_choices)
-
-    def __str__(self):
-        return self.type
-
-    
-# Create your models here.s
+type_choices = (
+    (1, u"Nourriture"),
+    (2, u"Hygiène"),
+    (3, u"Nettoyage")
+    )
+# Create your models here
 class Product(models.Model):
     name = models.CharField(max_length=200)
     unit = models.CharField(max_length=200)
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True)
+    type = models.IntegerField( null=True, choices=type_choices)
     def __str__(self):
         return self.name
     
-class Demande(models.Model):
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True)
-    produits = models.ManyToManyField(Product)
+class Item (models.Model):
+    product = models.ForeignKey(Product, related_name='product',on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(null=False, default=2)
+    
     def __str__(self):
-        return self.type
+        return self.product.name+' '+str(self.quantity)
+    
+class Demande(models.Model):
+    type = models.IntegerField(default=1, choices=type_choices)
+    items= models.ManyToManyField(Item)
+    def __str__(self):
+        return str(self.type)
 
 
 

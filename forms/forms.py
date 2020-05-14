@@ -7,14 +7,6 @@ Created on Wed Apr 29 14:57:42 2020
 
 from django import forms
 
-type_1 = 'Nourriture'
-type_2 = 'Hygiène'
-type_3 = 'Nettoyage'
-type_choices = (
-        (type_1, u"Nourriture"),
-        (type_2, u"Hygiène"),
-        (type_3, u"Nettoyage")
-        )
 class ContactForm(forms.Form):
     nom = forms.CharField(max_length=100, label = "nom de famille du foyer", required = True)
     email = forms.EmailField(max_length=100, label="email", required = True)
@@ -39,7 +31,11 @@ class ConnexionForm(forms.Form):
     mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "mot de passe", required = True)
 
 class CreateNewDemande(forms.Form):
-
+    type_choices = (
+            (1, u"Nourriture"),
+            (2, u"Hygiène"),
+            (3, u"Nettoyage")
+            )
     type = forms.ChoiceField(choices = type_choices)
 
 

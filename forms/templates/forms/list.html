@@ -6,8 +6,8 @@
 	<h1>Commande de {{d.type}} #{{d.id}}</h1>
 	<form method="post" action="#">
 		{% csrf_token %}
-		{% for product in d.produits.all %}
-			<p>{{product.name}} : {{product.unit}}</p>
+		{% for item in d.items.all %}
+			<p>{{item.product.name}} : {{item.quantity}} {{item.product.unit}}</p>
 		{% endfor %}
 		<label>Nom du produit</label>
 		<select name="name">
@@ -15,6 +15,7 @@
 				<option value="{{produit.name}}">{{produit.name}} ({{produit.unit}})</option>
 			{% endfor %}
 		</select>
+		<input name ="quantity"> quantity </input>
 		<button type="submit", name="newProduct", value="newProduct">
 			Ajouter
 		</button>
