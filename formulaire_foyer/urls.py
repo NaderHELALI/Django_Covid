@@ -15,12 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from forms import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('forms.urls')),
-
+    path('accueil/', views.accueil),
+    path('contact/', views.contact, name="contact"),
+    path('collectivite/', views.collectivite),
+    path('connexion/', views.connexion),
     path('', include("django.contrib.auth.urls")),
-
-
-
-]
+    path('deconnexion/', views.deconnexion),
+    path('tableau_de_bord/', views.tableau_de_bord),
+    path('<int:id>/create/', views.create),
+    path("<int:id>/<int:idc>", views.index, name="index"),
+    path('<int:id>/choix/', views.choix),
+    path('graphe/', views.graphe),
+    path('product/', views.product),
+    path("<int:id>/demandes", views.demandes),
+    path("<int:id>/membres", views.membres),
+              ]
+              

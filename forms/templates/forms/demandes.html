@@ -26,6 +26,9 @@
 			margin-left:160px;
 			padding:0px 10px;
 		}
+		.demandes{
+			display: inline-block;
+		}
 		
 	</style>
 		
@@ -45,7 +48,14 @@
 				<h1 class ="mt-2">Formulaire de collectivité</h1>
 				<hr class="mt-2 mb-4">
 				<h2>Bonjour {{c.nom}}. Votre id est {{id}}.</h2>
-				<h3>Vous avez {{nbDemandes}} demandes en cours.</h3>				
+				<h3>Vos demandes sont :</h3>
+				<div>
+					{% for d in c.demandes.all %}
+						<div>
+							<a href="/{{id}}/{{d.id}}">{{d.date_demande}} : {{d.type}}</a>
+						</div>
+					{% endfor %}
+				</div>
 			</div>
 		</div>
 	</div>

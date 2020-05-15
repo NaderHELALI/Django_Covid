@@ -1,56 +1,39 @@
 {% extends "forms/base.html" %}
 
 {% block content %}
+<div>
+	<h1>Tableau de bord</h1>
+</div>
+<html>
+<head>
+	<title>{% block title %}Tableau de bord{% endblock %}</title>
+</head>
+<body>
 	<div>
-		<h1>Tableau de bord</h1>
+		<table style="height: 200px; width: 400px;">
+			<tbody>
+				<tr style="height: 200px;">
+					<td style="width: 200px; height: 200px; text-align: center;background-color: #6D597A;">
+						<h2><strong><font color="white">Nombre de produits</font></strong></h2>
+					</td>
+					<td style="width: 200px; height: 200px; text-align: center;background-color: #355070;">
+						<h2><strong><font color="white">Nombre de demandes</font></strong></h2>
+					</td>
+				</tr>
+				<tr style="height: 200px;">
+					<td style="width: 200px; height: 200px; text-align: center;background-color: #E56B6F;">
+						<h1><strong><font color="white">{{nbProduits}}</font></strong></h1>
+					</td>
+					<td style="width: 200px; height: 200px; text-align: center;background-color: #EAAC8B;">
+						<h1><strong><font color="white">{{nbDemandes}}</font></strong></h1>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-	<html>
-	  <head>
-	   <title>{% block title %}Tableau de bord{% endblock %}</title>
-	   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	   <script type="text/javascript">
-		  google.charts.load('current', {'packages':['gauge']});
-		  google.charts.setOnLoadCallback(drawChart);
-
-		  function drawChart() {
-
-			var data = google.visualization.arrayToDataTable([
-			  ['Label', 'Value'],
-			  ['Memory', 80],
-			  ['CPU', 55],
-			  ['Network', 68]
-			]);
-
-			var options = {
-			  width: 400, height: 120,
-			  redFrom: 90, redTo: 100,
-			  yellowFrom:75, yellowTo: 90,
-			  minorTicks: 5
-			};
-
-			var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-
-			chart.draw(data, options);
-
-			setInterval(function() {
-			  data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-			  chart.draw(data, options);
-			}, 13000);
-			setInterval(function() {
-			  data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-			  chart.draw(data, options);
-			}, 5000);
-			setInterval(function() {
-			  data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-			  chart.draw(data, options);
-			}, 26000);
-		  }
-		</script>
-	  </head>
-	  <body>
-		<div id="chart_div" style="width: 400px; height: 120px;"></div>
-	  </body>
-	  <p><a href="/choix"> Retour </p>
+</body>
+<p><a href="/graphe"> Nombre de clients depuis l'ouverture </p>
+<p><a href="/deconnexion"> Deconnexion </p>
 	</html>
 	
-{% endblock %}
+	{% endblock %}

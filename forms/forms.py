@@ -13,14 +13,15 @@ class ContactForm(forms.Form):
     mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "mot de passe", required = True)
     numero_tel = forms.CharField(max_length=100, label = "numéro de téléphone", required=False)
     adresse = forms.CharField(widget=forms.Textarea, max_length=300, label = "adresse du domicile", required = True)
-    nombre = forms.ChoiceField(widget=forms.RadioSelect, choices = [("1", "1 membre"),("2", "2 membres"),("3", "3 membres"),("4", "4 membres"),("5", "5 membres"),("6", "6 membres"),("7", "7+ membres")], required = False)
-    membre1 = forms.CharField(max_length=100, label = "prénom du premier membre du foyer", required = False)
-    membre2 = forms.CharField(max_length=100, label = "prénom du deuxième membre du foyer", required = False)
-    membre3 = forms.CharField(max_length=100, label = "prénom du troisième membre du foyer", required = False)
-    membre4 = forms.CharField(max_length=100, label = "prénom du quatrième membre du foyer", required = False)
-    membre5 = forms.CharField(max_length=100, label = "prénom du cinquième membre du foyer", required = False)
-    membre6 = forms.CharField(max_length=100, label = "prénom du sixième membre du foyer", required = False)
+    ville = forms.CharField(max_length=100, label="Ville", required=True)
     
+class CollectiviteForm(forms.Form):
+    nom = forms.CharField(max_length=100, label = "Nom", required = True)
+    email = forms.EmailField(max_length=100, label="E-mail", required = True)
+    mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "Mot de passe", required = True)
+    numero_tel = forms.CharField(max_length=100, label = "Numéro de téléphone", required=False)
+    ville = forms.CharField(max_length=100, label = "Ville", required = True)
+
 #    sujet = forms.CharField(max_length=100)
 #    message = forms.CharField(widget=forms.Textarea)
 #    envoyeur = forms.EmailField(label="Votre adresse e-mail")
@@ -29,14 +30,24 @@ class ContactForm(forms.Form):
 class ConnexionForm(forms.Form):
     email = forms.EmailField(max_length=100, label="email", required = True)
     mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "mot de passe", required = True)
+    collectivite = forms.BooleanField(required= False)
 
 class CreateNewDemande(forms.Form):
+    type_choices = (
+            ("Nourriture", u"Nourriture"),
+            ("Hygiène", u"Hygiène"),
+            ("Nettoyage", u"Nettoyage")
+            )
+    type = forms.ChoiceField(choices = type_choices)
+
+class CreateNewProduct(forms.Form):
     type_choices = (
             (1, u"Nourriture"),
             (2, u"Hygiène"),
             (3, u"Nettoyage")
             )
-    type = forms.ChoiceField(choices = type_choices)
-
+    type = forms.ChoiceField(choices = type_choices,label="type")
+    name = forms.CharField(max_length=200,label="nom du produit")
+    unit = forms.CharField(max_length=200, label="unité du produit")
 
     

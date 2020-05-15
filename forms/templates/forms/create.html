@@ -1,15 +1,62 @@
-{% extends "forms/base.html" %}
-
 {% load crispy_forms_tags %}
-
-{% block content %}
-<div>
-    <h1>Commander</h1>
-</div>
-<form method="post" action="/create/">
-	{% csrf_token %}
-	{{form}}
-	<button type="submit", name="save", class="btn btn-success">Valider</button>
-	<p><a href="/choix"> Retour </p>
-</form>
-{% endblock %}
+<html>
+<head>
+	<style type="text/css">
+		.sidenav {
+			height:100%;
+			width:170px;
+			position: fixed;
+			z-index:1;
+			top:0;
+			left:0;
+			background-color:brown;
+			overflow-x: :hidden;
+			padding-top:20px;
+		}
+		
+		.sidenav a {
+			padding:6px 8px 16px;
+			text-decoration: none;
+			font-size:21px;
+			font-style:italic;
+			color: black;
+			display:block;
+		}
+		
+		.main{
+			margin-left:160px;
+			padding:0px 10px;
+		}
+		
+	</style>
+	
+	<title>{% block title %}Mes choix{% endblock %}</title>
+</head>
+<body>
+	<div class="sidenav">
+		<a href="/{{id}}/choix">Accueil</a>
+		<a href="/{{id}}/create">Commander</a>
+		<a href="/{{id}}/demandes">Mes Demandes</a>
+		<a href="/deconnexion">Se déconnecter</a>
+	</div>
+	
+	<div id="content", name="content", class="main">
+		<div class="row justify-content-center">
+			<div class ="col-8">
+				<h1 class ="mt-2">Formulaire de collectivité</h1>
+				<hr class="mt-2 mb-4">
+				<div>
+					<h1>Commander</h1>
+				</div>
+				<form method="post" action="/{{id}}/create/">
+					{% csrf_token %}
+					{{form}}
+					<button type="submit", name="save", class="btn btn-success">Valider</button>
+					<p><a href="/choix"> Retour </p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+	</html>		
+	

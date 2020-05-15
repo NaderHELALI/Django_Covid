@@ -1,0 +1,16 @@
+{% extends "forms/base.html" %}
+
+{% block content %}
+<form method="post" action="#">
+	{% csrf_token %}
+	<h4>Membres du foyer :</h4>
+	{% for m in c.membres.all %}
+		<p>{{m.nom}}</p>
+	{% endfor %}
+	<input name ="nom"> Nom du membre </input>
+	<button type="submit", name="newMembre", value="newMembre">
+		Ajouter
+	</button>
+	<p><a href="/{{id}}/choix"> Retour </p>
+</form>
+{%endblock%}
