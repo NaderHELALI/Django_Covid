@@ -24,7 +24,7 @@ urlpatterns = [
     path('collectivite/', views.collectivite),
     path('connexion/', views.connexion,name="connexion"),
     path('', include("django.contrib.auth.urls")),
-    path('deconnexion/', views.deconnexion),
+    path('deconnexion/', views.deconnexion, name="logout" ),
     path('tableau_de_bord/', views.tableau_de_bord),
     path('<int:id>/create/', views.create),
     path("<int:id>/<int:idc>", views.index, name="index"),
