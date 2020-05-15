@@ -1,49 +1,41 @@
-<html>
-<head>
-	<style type="text/css">
-		.sidenav {
-			height:100%;
-			width:170px;
-			position: fixed;
-			z-index:1;
-			top:0;
-			left:0;
-			background-color:brown;
-			overflow-x: :hidden;
-			padding-top:20px;
-		}
-		
-		.sidenav a {
-			padding:6px 8px 16px;
-			text-decoration: none;
-			font-size:21px;
-			font-style:italic;
-			color: black;
-			display:block;
-		}
-		
-		.main{
-			margin-left:160px;
-			padding:0px 10px;
-		}
-		
-	</style>
-		
-	<title>{% block title %}Accueil{% endblock %}</title>
-</head>
-<body>
-	<div class="sidenav">
-		<a href="/contact">Créer un compte</a>
-		<a href="/connexion">Se connecter</a>
-	</div>
-	
-	<div id="content", name="content", class="main">
-		<div class="row justify-content-center">
-			<div class ="col-8">
-				<h1 class ="mt-2">Formulaire de collectivité</h1>
-				<hr class="mt-2 mb-4">				
+{% extends "./base-fullscreen.html" %}
+
+{% block title %} Bienvenue{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="auth-wrapper">
+    <div class="auth-content">
+        <div class="auth-bg">
+            <span class="r"></span>
+            <span class="r s"></span>
+            <span class="r s"></span>
+            <span class="r"></span>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="mb-4">
+                    <i class="feather icon-airplay"></i>
+                </div>
+                <h3 class="mb-4">Bienvenue </h3>
+
+                <span class="mb-0 text-muted">
+                    
+                </span>
+
+                <br />
+				<br />
+				
+				<div >
+					
+					<button type="button" class="btn btn-light" ><a href="/contact">Créer un compte</a></button>
+					<button type="button" class="btn btn-light" ><a href="/connexion">Se connecter</a></button>
+					
+					
+				</div>
 			</div>
-		</div>
-	</div>
-</body>
-</html>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
