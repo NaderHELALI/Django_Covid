@@ -8,11 +8,11 @@ Created on Wed Apr 29 14:57:42 2020
 from django import forms
 
 class ContactForm(forms.Form):
-    nom = forms.CharField(max_length=100, label = "nom de famille du foyer", required = True)
-    email = forms.EmailField(max_length=100, label="email", required = True)
-    mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "mot de passe", required = True)
-    numero_tel = forms.CharField(max_length=100, label = "numéro de téléphone", required=False)
-    adresse = forms.CharField(widget=forms.Textarea, max_length=300, label = "adresse du domicile", required = True)
+    nom = forms.CharField(max_length=100, label = "Nom de famille du foyer", required = True)
+    email = forms.EmailField(max_length=100, label="E-mail", required = True)
+    mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "Mot de passe", required = True)
+    numero_tel = forms.CharField(max_length=100, label = "Numéro de téléphone", required=False)
+    adresse = forms.CharField(widget=forms.Textarea, max_length=300, label = "Adresse du domicile", required = True)
     ville = forms.CharField(max_length=100, label="Ville", required=True)
     
 class CollectiviteForm(forms.Form):
@@ -28,9 +28,10 @@ class CollectiviteForm(forms.Form):
 #    renvoi = forms.BooleanField(help_text="Cochez si vous souhaitez obtenir une copie du mail envoyé.", required=False)
     
 class ConnexionForm(forms.Form):
-    email = forms.EmailField(max_length=100, label="email", required = True)
-    mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "mot de passe", required = True)
+    email = forms.EmailField(max_length=100, label="E-mail", required = True)
+    mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "Mot de passe", required = True)
     collectivite = forms.BooleanField(required= False)
+    
 
 class CreateNewDemande(forms.Form):
     type_choices = (
@@ -46,8 +47,8 @@ class CreateNewProduct(forms.Form):
             (2, u"Hygiène"),
             (3, u"Nettoyage")
             )
-    type = forms.ChoiceField(choices = type_choices,label="type")
-    name = forms.CharField(max_length=200,label="nom du produit")
-    unit = forms.CharField(max_length=200, label="unité du produit")
+    type = forms.ChoiceField(choices = type_choices,label="Type")
+    name = forms.CharField(max_length=200,label="Nom du produit")
+    unit = forms.CharField(max_length=200, label="Unité du produit")
 
     

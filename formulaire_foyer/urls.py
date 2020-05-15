@@ -22,7 +22,7 @@ urlpatterns = [
     path('accueil/', views.accueil),
     path('contact/', views.contact, name="contact"),
     path('collectivite/', views.collectivite),
-    path('connexion/', views.connexion),
+    path('connexion/', views.connexion,name="connexion"),
     path('', include("django.contrib.auth.urls")),
     path('deconnexion/', views.deconnexion),
     path('tableau_de_bord/', views.tableau_de_bord),

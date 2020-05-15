@@ -1,16 +1,44 @@
-{% extends "forms/base.html" %}
+{% extends "./base-fullscreen.html" %}
+
+{% block title %} Register Membres {% endblock %}
 
 {% block content %}
+{% load crispy_forms_tags %}
+<div class="auth-wrapper">
+    <div class="auth-content">
+        <div class="auth-bg">
+            <span class="r"></span>
+            <span class="r s"></span>
+            <span class="r s"></span>
+            <span class="r"></span>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="mb-4">
+                    <i class="feather icon-user-plus auth-icon"></i>
+                </div>
+                <h3 class="mb-4">Inscription des membres</h3>
+
+                
+
+                <br />
+                <br />
 <form method="post" action="#">
 	{% csrf_token %}
 	<h4>Membres du foyer :</h4>
 	{% for m in c.membres.all %}
 		<p>{{m.nom}}</p>
 	{% endfor %}
-	<input name ="nom"> Nom du membre </input>
-	<button type="submit", name="newMembre", value="newMembre">
-		Ajouter
-	</button>
-	<p><a href="/{{id}}/choix"> Retour </p>
+    
+    <div class="form-group col-auto">
+        <input name ="nom" class="form-control" placeholder="Nom du membre">  </input>
+    </div>
+    <div class="col-auto">
+    <button type="submit", name="newMembre", value="newMembre", class="btn btn-primary shadow-3 mb-5">
+        Ajouter
+    </button>
+</div>
+	
+	<p><a href="/{{id}}/choix"> Continuer vers votre compte </p>
 </form>
 {%endblock%}
