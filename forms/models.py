@@ -51,3 +51,5 @@ class Collectivite(models.Model):
     mot_de_passe = models.CharField(max_length=100)
     numero_tel = models.CharField(max_length=100)
     ville = models.CharField(max_length=100)
+    def __str__(self):
+        return self.nom+" ("+self.ville+")"
