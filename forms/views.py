@@ -92,6 +92,8 @@ def deconnexion(request):
 def tableau_de_bord(request):
     nbProduits = len(Product.objects.all())
     nbDemandes = len(Demande.objects.all())
+    nbCollectivite = len(Collectivite.objects.all())
+    c = Compte.objects.all()
     return render(request, 'forms/tableau_de_bord.html', locals())
 
 def index(response, id, idc):

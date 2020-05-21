@@ -1,39 +1,196 @@
-{% extends "forms/base.html" %}
+{% load crispy_forms_tags %}
 
-{% block content %}
-<div>
-	<h1>Tableau de bord</h1>
-</div>
-<html>
 <head>
-	<title>{% block title %}Tableau de bord{% endblock %}</title>
+    <title>
+        Menu Foyer
+    </title>
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+        content="Datta Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs.">
+    <meta name="keywords"
+        content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template">
+    <meta name="author" content="CodedThemes">
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="/static/assets/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="/static/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="/static/assets/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="/static/assets/css/style.css">
+
+    <!-- Specific CSS goes HERE -->
+
+
 </head>
-<body>
-	<div>
-		<table style="height: 200px; width: 400px;">
-			<tbody>
-				<tr style="height: 200px;">
-					<td style="width: 200px; height: 200px; text-align: center;background-color: #6D597A;">
-						<h2><strong><font color="white">Nombre de produits</font></strong></h2>
-					</td>
-					<td style="width: 200px; height: 200px; text-align: center;background-color: #355070;">
-						<h2><strong><font color="white">Nombre de demandes</font></strong></h2>
-					</td>
-				</tr>
-				<tr style="height: 200px;">
-					<td style="width: 200px; height: 200px; text-align: center;background-color: #E56B6F;">
-						<h1><strong><font color="white">{{nbProduits}}</font></strong></h1>
-					</td>
-					<td style="width: 200px; height: 200px; text-align: center;background-color: #EAAC8B;">
-						<h1><strong><font color="white">{{nbDemandes}}</font></strong></h1>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<nav class="pcoded-navbar">
+    <div class="navbar-wrapper">
+        <div class="navbar-brand header-logo">
+            <a target="_blank" class="b-brand">
+                <div class="b-bg">
+                </div>
+                <span class="b-title">Formulaire Foyer</span>
+            </a>
+
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Menu collectivité</label>
+                </li>
+                <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item active">
+                    <a href="/" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                </li>
+
+                <li data-username="Disabled Menu" class="nav-item">
+                    <a href={% url 'logout' %} class="nav-link">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-power"></i>
+                        </span>
+                        <span class="pcoded-mtext">Deconnexion - [ {{c.nom}} ]</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+
+
+
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    <h5 class="m-b-10">Accueil</h5>
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Menu collectivité</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <!-- Nombres de Membres -->
+                        <div class="card daily-sales">
+                            <div class="card-block">
+                                <h5 class="mb-4">Nombres de Membres</h5>
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-9">
+                                        <h3 class="f-w-300 d-flex align-items-center m-b-0"><i
+                                                class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$ 249.95</h3>
+                                    </div>
+
+                                    <div class="col-3 text-right">
+                                        <p class="m-b-0">67%</p>
+                                    </div>
+                                </div>
+                                <div class="progress m-t-30" style="height: 7px;">
+                                    <div class="progress-bar progress-c-theme" role="progressbar" style="width: 50%;"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Nombres de Membres -->
+                        <div>
+                        <!--Recent Membres -->
+                        <div class="col-xl-8 col-md-6">
+                            <div class="card Recent-Users">
+                                <div class="card-header">
+                                    <h5>Recent Users</h5>
+                                </div>
+                                <div class="card-block px-0 py-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                                {% for d in c.all %}
+                                                <tr class="unread">
+                                                    <td><img class="rounded-circle" style="width:40px;"
+                                                            src="/static/assets/images/user/avatar-1.jpg"
+                                                            alt="activity-user"></td>
+                                                    <td>{{d.nom}}</td>
+                                                    <td>{{d.date_inscription}}</td>
+                                                </tr>
+                                       
+                                        {% endfor %}
+                                        
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Recent Membres -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card">
+                                <div class="card-block border-bottom">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <i class="feather icon-shopping-cart text-c-green" class="fa-10x"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="f-w-300">{{nbDemandes}}</h3>
+                                            <span class="d-block text-uppercase">TOTAL DES DEMANDES</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-auto">
+                                            <i class="feather icon-map-pin f-30 text-c-blue"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="f-w-300">{{nbCollectivite}}</h3>
+                                            <span class="d-block text-uppercase">TOTAL COLLECTIVITE</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                    </body>
+
+                    </html>
+
+                    <!-- [ Main Content ] end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+<script src="/static/assets/js/vendor-all.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/pcoded.min.js"></script>
+
+
 </body>
-<p><a href="/graphe"> Nombre de clients depuis l'ouverture </p>
-<p><a href="/deconnexion"> Deconnexion </p>
-	</html>
-	
-	{% endblock %}
+
+</html>

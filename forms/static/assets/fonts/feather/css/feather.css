@@ -183,7 +183,7 @@
 
 .icon-eye:before { content: "\e86a"; }
 
-.icon-feather:before { content: "\e86b"; }
+.icon-feather:before { content: "\e86b"; size: 100px; }
 
 .icon-facebook:before { content: "\e86c"; }
 

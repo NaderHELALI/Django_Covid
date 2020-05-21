@@ -31,6 +31,8 @@ class Demande(models.Model):
 
 class Membre(models.Model):
     nom=models.CharField(max_length=100)
+    def __str__(self):
+        return str(self.nom)
     
 class Compte(models.Model):
     nom = models.CharField(max_length=100)
