@@ -10530,18 +10530,6 @@ div.code-toolbar > .toolbar span:hover {
 /**====== File Upload css end ======**/
 
 
-.fixed-button {
-	position: fixed;
-	bottom: -50px;
-	right: 30px;
-	opacity: 0;
-	z-index: 9;
-	-webkit-transition: all 0.5s ease;
-	transition: all 0.5s ease;
-	-webkit-animation: pulse 2s infinite;
-	animation: pulse 2s infinite;
-	border-radius: 0.25rem
-}
 
 .fixed-button .btn {
 	margin: 0;

@@ -58,7 +58,6 @@
                 </li>
                 
                 
-                
                 <li data-username="Disabled Menu" class="nav-item">
                     <a href={% url 'logout' %} class="nav-link">
                         <span class="pcoded-micon">
@@ -100,58 +99,38 @@
                 <!-- [ Main Content ] start -->
                
 
-				<!-- Nombres de Membres -->
-                <div class="card daily-sales mb-6">
-                    <div class="card-block">
-                        <h5 class="mb-4">Nombres de Membres</h5>
-                        <div class="row d-flex align-items-center">
-                            <div class="col-9">
-                                <h3 class="f-w-300 d-flex align-items-center m-b-0"><i
-                                        class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>{{nbMembres}}</h3>
-                            </div>
-
-                            
+				
+                <!--Recent Membres -->
+                <div class="col-xl-8 col-md-6">
+                    <div class="card Recent-Users">
+                        <div class="card-header">
+                            <h5>Compte des 7 derniers jours </h5>
                         </div>
-                       
-                    </div>
-                </div>
-                <!--End Nombres de Membres -->
-                
-                
-                
-                <div class="col-xl-8 col-md-2">
-                    <div class="card">
-                        <div class="card-block border-bottom">
-                            <div class="row d-flex align-items-center">
-                                <div class="col-auto">
-                                    <i class="feather icon-shopping-cart text-c-green" class="fa-10x"></i>
-                                </div>
-                                <div class="col">
-                                    <h3 class="f-w-300">{{nbDemandes}}</h3>
-                                    <span class="d-block text-uppercase">NOMBRES TOTALES DE DEMANDES</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-block">
-                            <div class="row d-flex align-items-center"> 
-                                <div class="col-auto">
-                                    <i class="feather icon-map-pin f-30 text-c-blue"></i>
-                                </div>
-                                <div class="col">
-                                    <h3 class="f-w-300">{{nbCollectivite}}</h3>
-                                    <span class="d-block text-uppercase">NOMBRES DE COLLECTIVITE</span>
-                                </div>
+                        <div class="card-block px-0 py-3">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        {% for d in c.all %}
+                                        <tr class="unread">
+                                            <td><img class="rounded-circle" style="width:40px;"
+                                                    src="/static/assets/images/user/avatar-2.jpg"
+                                                    alt="activity-user"></td>
+                                            <td>{{d.nom}}</td>
+                                            <td>{{d.date_inscription}}</td>
+                                        </tr>
+                               
+                                {% endfor %}
+                                
+                                        
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            </div>
-            </body>
-
-            </html>
-
+                <!--End Recent Membres -->
+                
+                
                 <!-- [ Main Content ] end -->
             </div>
         </div>

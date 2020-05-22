@@ -11,6 +11,9 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 import matplotlib.pyplot
 import matplotlib.pyplot as plt
 import numpy as np
+from datetime import datetime, timedelta
+
+
 
 def accueil(request):
     return render(request, 'forms/accueil.html', locals())
@@ -77,7 +80,7 @@ def connexion(request):
                 c = Collectivite.objects.get(email = email)
                 if mot_de_passe == c.mot_de_passe:
                     return HttpResponseRedirect("/tableau_de_bord")
-            else:
+            else:   
                 c = Compte.objects.get(email = email)
                 if mot_de_passe == c.mot_de_passe:
                     return HttpResponseRedirect("/%i/choix" %c.id)
@@ -90,12 +93,17 @@ def deconnexion(request):
     return render(request, 'forms/deconnexion.html', locals())
 
 def tableau_de_bord(request):
+    nbMembres = len(Membre.objects.all())
     nbProduits = len(Product.objects.all())
     nbDemandes = len(Demande.objects.all())
     nbCollectivite = len(Collectivite.objects.all())
-    c = Compte.objects.all()
-    return render(request, 'forms/tableau_de_bord.html', locals())
+    
+    return render(request,'forms/tableau_de_bord.html', locals())
 
+def tableau_de_bord_membres(request):
+    c = Compte.objects.filter(date_inscription__lte=datetime.now() + timedelta(days=7))[:6]
+    return render(request,'forms/tableau_de_bord_membres.html', locals())
+     
 def index(response, id, idc):
     d = Demande.objects.get(id=idc)
     c = Compte.objects.get(id=id)
@@ -171,3 +179,8 @@ def graphe(request):
     canvas.print_jpg(response)
     matplotlib.pyplot.close(f)
     return response
+
+
+def map(request):
+    
+    return render(request,  'forms/a_DEP.html')
