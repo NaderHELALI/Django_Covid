@@ -120,7 +120,10 @@ strong {
 .img-radius {
   border-radius: 50%;
 }
-
+.center-div {
+	margin:  auto;
+	width: 100px; 
+}
 .page-header-title + .breadcrumb {
   background: transparent;
   padding: 0;

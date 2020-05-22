@@ -1,10 +1,25 @@
-{% extends "forms/base.html" %}
+{% extends "./base-fullscreen.html" %}
+
+
+
+{% block title %} Deconnexion {% endblock %}
 {% block content %}
 <h1>Vous êtes maintenant deconnecté, à bientôt sur notre plateforme !</h1>
-<title>{% block title %}Déconnexion{% endblock %}</title>
-<img alt="" 
-	 src="https://cdn.pixabay.com/photo/2017/08/22/16/33/goodbye-2669587_1280.png"
-	 width="400"
-     height="341">
-<a href="/accueil">Retour à l'écran de connexion</a>
-{% endblock %}
+<div class="container	" >
+	
+		<div class="card text-center" style="width: 30rem;">
+			<img class="card-img-top" src="https://cdn.pixabay.com/photo/2017/08/22/16/33/goodbye-2669587_1280.png"
+				alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Déconnection</h5>
+				<p class="card-text">Au plaisir de vous revoir.</p>
+			</div>
+
+			<div class="card-body">
+				<a href="/accueil">Retour à l'écran de connexion</a>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
