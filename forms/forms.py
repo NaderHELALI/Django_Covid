@@ -13,6 +13,7 @@ class ContactForm(forms.Form):
     mot_de_passe = forms.CharField(widget=forms.PasswordInput,max_length=100, label = "Mot de passe", required = True)
     numero_tel = forms.CharField(max_length=100, label = "Numéro de téléphone", required=False)
     adresse = forms.CharField(widget=forms.Textarea, max_length=300, label = "Adresse du domicile", required = True)
+    departement = forms.CharField(max_length=2, label = "Numéro de Dépatement", required = True)
     ville = forms.CharField(max_length=100, label="Ville", required=True)
     
 class CollectiviteForm(forms.Form):

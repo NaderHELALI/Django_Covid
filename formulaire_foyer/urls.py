@@ -32,7 +32,9 @@ urlpatterns = [
     path('<int:id>/choix/', views.choix),
     path('graphe/', views.graphe),
     path('maps/', views.map),
-    
+    path('stat1/', views.stat1),
+    path('stat2/', views.stat2),
+    path('stat3/', views.stat3),
     path('product/', views.product),
     path("<int:id>/demandes", views.demandes),
     path("<int:id>/membres", views.membres),

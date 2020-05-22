@@ -7,11 +7,20 @@ from .models import Demande, Product, Compte, Collectivite, Item, Membre
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext 
 from matplotlib.backends.backend_agg import FigureCanvasAgg
-
-import matplotlib.pyplot
+from django.db import connection
+from datetime import datetime
 import matplotlib.pyplot as plt
+import matplotlib.dates as dates
 import numpy as np
+import sqlite3
+import pandas as pd
+from matplotlib.figure import Figure
 from datetime import datetime, timedelta
+import folium
+import json
+import branca
+import requests
+
 
 
 
@@ -101,7 +110,7 @@ def tableau_de_bord(request):
     return render(request,'forms/tableau_de_bord.html', locals())
 
 def tableau_de_bord_membres(request):
-    c = Compte.objects.filter(date_inscription__lte=datetime.now() + timedelta(days=7))[:6]
+    c = Compte.objects.filter(date_inscription__lte=datetime.now() + timedelta(days=7))
     return render(request,'forms/tableau_de_bord_membres.html', locals())
      
 def index(response, id, idc):
@@ -162,25 +171,120 @@ def choix(request,id):
     c = Compte.objects.get(id=id)
     nbDemandes = len(c.demandes.all())
     return render(request, 'forms/choix.html', locals())
-
 def graphe(request):
-    f = plt.figure()
-    abscisse = np.arange(10)
-    ordonnee = [0,1,2,3,5,6,10,23,43,65]
-    plt.title('Title')
-    plt.xlim(0, 10)
-    plt.ylim(0, 70)
-    plt.xlabel('Temps (jours)')
-    plt.ylabel('Nombre de clients inscrits')
-    bar1 = plt.plot(abscisse,ordonnee,color='Green')
+   
+    return request
 
+
+
+def stat1(request):
+    f = plt.figure()
+    co = sqlite3.connect('./db.sqlite3')
+    data = pd.read_sql_query('SELECT DISTINCT(type),count(type) FROM forms_demande GROUP BY type;',co)
+    df = pd.DataFrame(data)
+    f, ax = plt.subplots()
+   
+    df.plot(kind = 'bar', color = 'firebrick',ax=ax, x = 'type',figsize=(11,11), title = "Nombre de commandes par type de produits" )
+    plt.xlabel('Type de produits')
+    plt.ylabel("Nombre de commandes")
+    plt.legend('')
+    fig, ax = plt.subplots()
+    df.plot(ax=ax)
+    plt.close(f)
+    #plt.savefig('output.png')
     canvas = FigureCanvasAgg(f)
-    response = HttpResponse(content_type='image/jpg')
+    response = HttpResponse(content_type='image\png')
+    canvas.print_png(response)
+    plt.close(f)
+    return response
+
+def stat2(request):
+    f = Figure()
+    co = sqlite3.connect('./db.sqlite3')
+    data = pd.read_sql_query('SELECT count(nom), ville FROM forms_compte GROUP BY nom;',co)
+    df = pd.DataFrame(data)
+    f, ax = plt.subplots()
+    df.plot(kind = 'bar', color = 'gold',ax=ax, x = 'ville',figsize=(11,11), title = "Nombre de foyers par ville" )
+    plt.xlabel('Ville')
+    plt.ylabel("Nombre de foyers")
+    plt.legend('')
+    fig, ax = plt.subplots()
+    df.plot(ax=ax)
+    canvas = FigureCanvasAgg(f)
+    response = HttpResponse(content_type='image\jpg')
     canvas.print_jpg(response)
-    matplotlib.pyplot.close(f)
+    plt.close(f)
+    return response
+
+def stat3(request):
+    f = Figure()
+    co = sqlite3.connect('./db.sqlite3')
+    data = pd.read_sql_query('SELECT count(date_demande),date_demande FROM forms_demande GROUP BY date_demande;',co)
+    df = pd.DataFrame(data)
+    f, ax = plt.subplots()
+    df.plot(kind = 'bar', color = 'limegreen',ax=ax, x = 'date_demande',figsize=(11,11), title = "Nombre de commandes par jour" )
+    plt.xlabel('Date')
+    plt.ylabel("Nombre de commandes")
+    plt.legend('')
+    fig, ax = plt.subplots()
+    df.plot(ax=ax)
+    canvas = FigureCanvasAgg(f)
+    response = HttpResponse(content_type='image\jpg')
+    canvas.print_jpg(response)
+    plt.close(f)
     return response
 
 
+
 def map(request):
+    #Pour la répartion on a utilisé des données autre que celle dans la base de donnée 
     
-    return render(request,  'forms/a_DEP.html')
+    """
+    # Créer la Map en zoomant sur la France
+    m = folium.Map(location=[45, 1], zoom_start=6)
+
+    # Récupère les données des communes
+    state_geo = 'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departementartements.geojson'
+            
+    print(state_geo)
+    # Récupère les données de la base de donnée
+    co = sqlite3.connect('./db.sqlite3')
+    data = pd.read_sql_query('SELECT departement FROM `forms_compte`;',co)
+    print(data)
+    
+    # Nb Personne par departement
+    g1 = data.groupby(["departement"]).size().reset_index(name='Number of people')
+    g1.set_index('departement')
+    print(g1)
+    
+
+
+    g1['departement']=g1['departement'].astype(str)
+    print(g1['departement'].dtypes)
+    a=max(g1['Number of people'])
+    bins = [0,0.25*a,0.5*a,0.75*a,a]
+    print(bins)
+
+    choropleth=folium.Choropleth(
+        geo_data=state_geo,
+        name='Nb membres',
+        data=g1,
+        columns =['departement','Number of people'],
+        key_on='feature.properties.code',
+        fill_color='BuPu',
+        fill_opacity=0.7,
+        line_opacity=0.5,
+        highlight=True,
+        legend_name='Nombres de foyer enregistrée',
+        bins=bins,
+        ).add_to(m)
+
+
+    
+
+    m.save(".forms/a_departement.html")
+    
+    
+    """
+    
+    return render(request,  'forms/a_departement.html')

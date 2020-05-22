@@ -40,6 +40,7 @@ class Compte(models.Model):
     mot_de_passe = models.CharField(max_length=100)
     numero_tel = models.CharField(max_length=100)
     adresse = models.CharField(max_length=100)
+    departement = models.CharField(max_length=100)
     ville = models.CharField(max_length=100)
     date_inscription = models.DateField(auto_now=True)
     membres = models.ManyToManyField(Membre)
