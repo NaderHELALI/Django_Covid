@@ -14,11 +14,6 @@ grâce à la commande cd
 Ouvrez un navigateur et entrez l'adresse :
 http://127.0.0.1:8000/
 
-Voici des identifiants de collectivité 
-pour tester la plateforme:
-
-email : mairie@gmail.com
-mot de passe : 123123
 
 Afin d'avoir accès à la partie administrateur,
 il suffit de taper cette commande dans l'invité
